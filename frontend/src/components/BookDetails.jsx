@@ -11,7 +11,6 @@ const BookDetails = ({ book }) => {
             return;
         }
 
-        // Extract book ID from key, assuming key looks like "/works/OL12345W"
         const bookId = book.key.split('/').pop();
 
         setLoading(true);
@@ -56,7 +55,6 @@ const BookDetails = ({ book }) => {
             <h2 className="text-xl font-bold mb-2">{details.title}</h2>
             <p><strong>Description:</strong> {details.description ? (typeof details.description === 'string' ? details.description : details.description.value) : 'N/A'}</p>
             <p><strong>First published:</strong> {details.first_publish_date || 'N/A'}</p>
-            {/* Add more fields as available */}
         </div>
     );
 };
