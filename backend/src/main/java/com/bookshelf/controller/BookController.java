@@ -4,18 +4,21 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin(origins = "http://localhost:5173")
 public class BookController {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping
     public ResponseEntity<?> searchBooks(@RequestParam("q") String query) {
+
         String url = "https://openlibrary.org/search.json?q=" + UriUtils.encode(query, StandardCharsets.UTF_8);
         try {
             String response = restTemplate.getForObject(url, String.class);
