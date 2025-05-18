@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import '../styles/Search.css';
 
 const Search = ({ setSearchResults, setLoading, setError, setSelectedBook }) => {
     const [query, setQuery] = useState('');
+    const inputRef = useRef(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,7 +22,7 @@ const Search = ({ setSearchResults, setLoading, setError, setSelectedBook }) => 
 
             const data = await response.json();
             console.log('Search results data:', data);
-            setSearchResults(data);
+            setSearchResults(data.docs || []);
         } catch (error) {
             setError('Error fetching books. Please check your connection or try again later.');
             console.error(error);
@@ -29,18 +31,37 @@ const Search = ({ setSearchResults, setLoading, setError, setSelectedBook }) => 
         }
     };
 
+    const handleClear = () => {
+        setQuery('');
+        inputRef.current.focus();
+    };
+
     return (
-        <form onSubmit={handleSubmit} className="flex gap-2">
-            <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search books..."
-                className="flex-grow p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+        <form onSubmit={handleSubmit} className="search-bar">
+            <div className="search-input-container">
+                <input
+                    ref={inputRef}
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search books..."
+                    className="search-input"
+                />
+                {query && (
+                    <button
+                        type="button"
+                        onClick={handleClear}
+                        className="clear-button"
+                        aria-label="Clear search"
+                    >
+                        ✕
+                    </button>
+                )}
+            </div>
             <button
                 type="submit"
-                className="bg-blue-600 text-white px-4 rounded hover:bg-blue-700 transition"
+                disabled={!query.trim()}
+                className="search-button"
             >
                 Search
             </button>
