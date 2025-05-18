@@ -1,0 +1,28 @@
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 3rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .book-link {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease-in-out;
+    display: block;
+    height: 100%;
+  }
+
+  .book-link:hover {
+    transform: translateY(-5px);
+  }
+
+  @media (max-width: 768px) {
+    .book-list {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+    }
+  }
