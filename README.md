@@ -38,7 +38,8 @@ In the backend directory, run the following commands:
 
 ```
 mvn clean install
-mvn spring-boot:run ```
+mvn spring-boot:run
+```
 
 The backend server will start on http://localhost:8080.
 
@@ -48,10 +49,12 @@ Navigate to the frontend directory.
 Install dependencies:
 
 ```
-npm install ```
+npm install
+```
 
 Start the development server:
 ```
-npm run dev ```
+npm run dev
+```
 
 The frontend will be accessible at http://localhost:5173 and will connect to the backend API.
